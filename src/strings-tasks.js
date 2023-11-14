@@ -38,7 +38,7 @@ function getStringLength(value) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  return typeof value.valueOf() === 'string';
+  return typeof value === 'string' || value instanceof String;
 }
 
 /**
@@ -254,7 +254,7 @@ function formatTime(minutes, seconds) {
  *   reverseString('12345') => '54321'
  */
 function reverseString(str) {
-  return str.reverseString();
+  return str.split('').reverse().join('');
 }
 
 /**
@@ -268,8 +268,20 @@ function reverseString(str) {
  *   orderAlphabetically('textbook') => 'bekoottx'
  *   orderAlphabetically('abc123xyz') => '123abcxyz'
  */
-function orderAlphabetically(/* str */) {
-  throw new Error('Not implemented');
+function orderAlphabetically(str) {
+  const charsCodes = [];
+  for (let i = 0; i < str.length; i += 1) {
+    charsCodes.push(str.charCodeAt(i));
+  }
+
+  charsCodes.sort((a, b) => a - b);
+
+  let strSorted = '';
+  for (let i = 0; i < charsCodes.length; i += 1) {
+    strSorted += String.fromCharCode(charsCodes[i]);
+  }
+
+  return strSorted;
 }
 
 /**
