@@ -468,8 +468,8 @@ function unbracketTag(str) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -488,8 +488,15 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,!? ';
+  const rot13Alphabet =
+    'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm.,!? ';
+  const letters = str.split('');
+  const wordCoded = letters.map(
+    (letter) => rot13Alphabet[alphabet.indexOf(letter)]
+  );
+  return wordCoded.join('');
 }
 
 /**
@@ -516,8 +523,13 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const suit = '♣♦♥♠';
+  const cards = 'A234567891JQK';
+  return (
+    cards.indexOf(value[0]) +
+    cards.length * suit.indexOf(value[value.length - 1])
+  );
 }
 
 module.exports = {
